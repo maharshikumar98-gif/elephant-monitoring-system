@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Elephant Monitoring System</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background-image:url("/static/elephant_bg.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+.overlay{
+background:rgba(0,0,0,0.55);
+min-height:100vh;
+padding-top:40px;
+}
+
+.header{
+text-align:center;
+color:white;
+font-size:36px;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:10px;
+}
+
+input,select{
+width:100%;
+padding:8px;
+margin-top:5px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.coords{
+display:flex;
+gap:6px;
+}
+
+.coords input{
+width:33%;
+}
+
+button{
+width:100%;
+margin-top:15px;
+padding:10px;
+border:none;
+background:#2e7d32;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.linkbtn{
+display:block;
+text-align:center;
+margin-top:12px;
+padding:10px;
+background:#1976d2;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+.linkbtn:hover{
+background:#0d47a1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="header">
+🐘 Elephant Monitoring System
+</div>
+
+<div class="container">
+
+<form action="/add" method="post">
+
+<label>Latitude</label>
+
+<div class="coords">
+<input type="number" name="lat_deg" placeholder="Deg">
+<input type="number" name="lat_min" placeholder="Min">
+<input type="number" name="lat_sec" placeholder="Sec">
+</div>
+
+<label>Longitude</label>
+
+<div class="coords">
+<input type="number" name="lon_deg" placeholder="Deg">
+<input type="number" name="lon_min" placeholder="Min">
+<input type="number" name="lon_sec" placeholder="Sec">
+</div>
+
+<label>Observation Time</label>
+<input type="datetime-local" name="observation_time">
+
+<label>Sign Type</label>
+<select name="sign_type">
+<option value="dung">Dung</option>
+<option value="pugmark">Pugmark</option>
+<option value="sighting">Direct Sighting</option>
+</select>
+
+<label>Sign Age (hours)</label>
+<input type="number" name="sign_age_hours">
+
+<button type="submit">Add Observation</button>
+
+</form>
+
+<a class="linkbtn" href="/map">View Movement Map</a>
+
+<a class="linkbtn" href="/export_kml">Download KML</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

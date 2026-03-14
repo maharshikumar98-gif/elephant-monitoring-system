@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="18">
+            <LineStyle id="19">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>4</width>
+            </LineStyle>
+        </Style>
+        <Placemark id="3">
+            <name>Point 1</name>
+            <description>Presence time: 2026-03-13 08:05:00</description>
+            <Point id="2">
+                <coordinates>80.48981111111111,21.56263611111111,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="5">
+            <name>Point 2</name>
+            <description>Presence time: 2026-03-13 08:32:00</description>
+            <Point id="4">
+                <coordinates>80.48975555555556,21.562608333333333,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="7">
+            <name>Point 3</name>
+            <description>Presence time: 2026-03-14 04:39:00</description>
+            <Point id="6">
+                <coordinates>80.50567222222222,21.585923333333334,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="9">
+            <name>Point 4</name>
+            <description>Presence time: 2026-03-14 04:59:00</description>
+            <Point id="8">
+                <coordinates>80.60537666666666,21.585395,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="11">
+            <name>Point 5</name>
+            <description>Presence time: 2026-03-14 05:25:00</description>
+            <Point id="10">
+                <coordinates>80.50202333333333,21.576888888888888,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="13">
+            <name>Point 6</name>
+            <description>Presence time: 2026-03-14 07:29:00</description>
+            <Point id="12">
+                <coordinates>80.49515666666667,21.610338333333335,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="15">
+            <name>Point 7</name>
+            <description>Presence time: 2026-03-14 18:30:00</description>
+            <Point id="14">
+                <coordinates>80.48504833333334,21.636535,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>Elephant Movement Route</name>
+            <styleUrl>#18</styleUrl>
+            <LineString id="16">
+                <coordinates>80.48981111111111,21.56263611111111,0.0 80.48975555555556,21.562608333333333,0.0 80.50567222222222,21.585923333333334,0.0 80.60537666666666,21.585395,0.0 80.50202333333333,21.576888888888888,0.0 80.49515666666667,21.610338333333335,0.0 80.48504833333334,21.636535,0.0</coordinates>
+            </LineString>
+        </Placemark>
+    </Document>
+</kml>
