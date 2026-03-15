@@ -146,10 +146,14 @@ def generate_map():
         offset=7,
         attributes={"font-size": "16", "fill": "red"}
     ).add_to(m)
-    m.save("static/elephant_map.html")
+    
+    https://elephant-monitoring-system.onrender.com/map
 
-    return RedirectResponse(url="/static/elephant_map.html")
-
+    @app.get("/delete/{entry_id}")
+    def delete_entry(entry_id: int):
+        cursor.execute("DELETE FROM elephant_data WHERE id=?", (entry_id,))
+        conn.commit()
+        return RedirectResponse(url="/map")
 
 @app.get("/export_kml")
 def export_kml():
