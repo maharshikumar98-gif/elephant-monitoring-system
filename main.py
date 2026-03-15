@@ -155,6 +155,11 @@ def generate_map():
         conn.commit()
         return RedirectResponse(url="/map")
 
+    @app.get("/data")
+    def view_data():
+        df = pd.read_sql_query("SELECT * FROM elephant_data ORDER BY datetime(presence_time)", conn)
+        return df.to_html()
+
 @app.get("/export_kml")
 def export_kml():
 
