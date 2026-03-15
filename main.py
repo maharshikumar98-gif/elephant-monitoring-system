@@ -41,6 +41,10 @@ conn.commit()
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/viewer", response_class=HTMLResponse)
+def viewer(request: Request):
+    return templates.TemplateResponse("viewer.html", {"request": request})
+
 @app.post("/add")
 def add_data(
     lat_deg: float = Form(...),
@@ -69,6 +73,7 @@ def add_data(
     conn.commit()
 
     return {"status": "Observation added successfully"}
+
 
 
 @app.get("/map")
