@@ -147,7 +147,7 @@ def generate_map():
         attributes={"font-size": "16", "fill": "red"}
     ).add_to(m)
     
-    https://elephant-monitoring-system.onrender.com/map
+    
 
     @app.get("/delete/{entry_id}")
     def delete_entry(entry_id: int):
