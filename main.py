@@ -153,12 +153,11 @@ def generate_map():
     def delete_entry(entry_id: int):
         cursor.execute("DELETE FROM elephant_data WHERE id=?", (entry_id,))
         conn.commit()
-        return RedirectResponse(url="/map")
-
+        return RedirectResponse(url="/map", status_code=303)
     @app.get("/data")
     def view_data():
         df = pd.read_sql_query("SELECT * FROM elephant_data ORDER BY datetime(presence_time)", conn)
-        return df.to_html()
+        return HTMLResponse(df.to_html())
 
 @app.get("/export_kml")
 def export_kml():
