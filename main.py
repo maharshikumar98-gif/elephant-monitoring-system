@@ -17,9 +17,9 @@ def dms_to_decimal(deg, minutes, seconds):
     return float(deg) + float(minutes)/60 + float(seconds)/3600
 
 app = FastAPI()
+templates = Jinja2Templates(directory="./templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="./templates")
 
 # database connection
 conn = sqlite3.connect("database.db", check_same_thread=False)
