@@ -84,8 +84,7 @@ def generate_map():
 
     df = pd.read_sql_query("SELECT * FROM elephant_data ORDER BY presence_time", conn)
     if df.empty:
-        return {"message": "No data available"}
-
+        return HTMLResponse("<h2>No elephant movement data available</h2>")
     coords = list(zip(df.latitude, df.longitude))
 
     m = folium.Map(location=coords[0], zoom_start=12)
@@ -146,9 +145,11 @@ def generate_map():
         offset=7,
         attributes={"font-size": "16", "fill": "red"}
     ).add_to(m)
-    
-    
 
+    m.save("static/elephant_map.html")
+
+    return RedirectResponse(url="/static/elephant_map.html")
+    
     @app.get("/delete/{entry_id}")
     def delete_entry(entry_id: int):
         cursor.execute("DELETE FROM elephant_data WHERE id=?", (entry_id,))
