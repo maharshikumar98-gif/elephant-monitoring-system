@@ -4,6 +4,9 @@ from fastapi.responses import RedirectResponse
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi import Request
+
+templates = Jinja2Templates(directory="templates")
 import sqlite3
 import pandas as pd
 from datetime import datetime, timedelta
