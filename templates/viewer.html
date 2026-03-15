@@ -1,75 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+<title>Elephant Movement Viewer</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:400px;
+margin:auto;
+margin-top:120px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.map{
+background:#3b82f6;
+color:white;
+}
+
+.kml{
+background:#22c55e;
+color:white;
+}
+</style>
+
 </head>
+
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;title&gt;Elephant Movement Viewer&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;style&gt;</span></p>
-<p class="p1"><span class="s1">body{</span></p>
-<p class="p1"><span class="s1">font-family: Arial;</span></p>
-<p class="p1"><span class="s1">text-align:center;</span></p>
-<p class="p1"><span class="s1">background:#f4f4f4;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">.container{</span></p>
-<p class="p1"><span class="s1">width:500px;</span></p>
-<p class="p1"><span class="s1">margin:auto;</span></p>
-<p class="p1"><span class="s1">margin-top:100px;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">button{</span></p>
-<p class="p1"><span class="s1">width:100%;</span></p>
-<p class="p1"><span class="s1">padding:15px;</span></p>
-<p class="p1"><span class="s1">margin:10px;</span></p>
-<p class="p1"><span class="s1">font-size:18px;</span></p>
-<p class="p1"><span class="s1">border:none;</span></p>
-<p class="p1"><span class="s1">border-radius:6px;</span></p>
-<p class="p1"><span class="s1">cursor:pointer;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">.map{</span></p>
-<p class="p1"><span class="s1">background:#3b82f6;</span></p>
-<p class="p1"><span class="s1">color:white;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">.kml{</span></p>
-<p class="p1"><span class="s1">background:#22c55e;</span></p>
-<p class="p1"><span class="s1">color:white;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div class="container"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;h1&gt;Elephant Movement Viewer&lt;/h1&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;button class="map" onclick="location.href='/map'"&gt;</span></p>
-<p class="p1"><span class="s1">View Movement Map</span></p>
-<p class="p1"><span class="s1">&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;button class="kml" onclick="location.href='/export_kml'"&gt;</span></p>
-<p class="p1"><span class="s1">Download KML</span></p>
-<p class="p1"><span class="s1">&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+<div class="container">
+
+<h1>Elephant Movement Viewer</h1>
+
+<button class="map" onclick="window.location.href='/map'">
+View Movement Map
+</button>
+
+<button class="kml" onclick="window.location.href='/export_kml'">
+Download KML
+</button>
+
+</div>
+
 </body>
 </html>
+
