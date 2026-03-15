@@ -105,15 +105,14 @@ def generate_map():
         )
     ).add_to(m)
     
-    for i, row in df.iterrows():
+    for i, row in enumerate(df.itertuples()):
 
-        if i == len(df) - 1:   # latest point
+        if i == len(df) - 1:
             icon_color = "red"
             size = 36
         else:
             icon_color = "blue"
             size = 24
-
         folium.Marker(
             location=[row.latitude, row.longitude],
             popup=f"""
