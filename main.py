@@ -13,6 +13,22 @@ import folium
 import simplekml
 import geopandas as gpd
 from folium.plugins import PolyLineTextPath
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import pandas as pd
+
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name(
+    "credentials.json", scope
+)
+
+client = gspread.authorize(creds)
+
+sheet = client.open("Elephant_Data").sheet1
 def dms_to_decimal(deg, minutes, seconds):
     return float(deg) + float(minutes)/60 + float(seconds)/3600
 
@@ -82,7 +98,10 @@ def add_data(
 def generate_map():
 
 
-    df = pd.read_sql_query("SELECT * FROM elephant_data ORDER BY presence_time", conn)
+    df = pd.read_sql_query(
+        "SELECT * FROM elephant_data ORDER BY datetime(presence_time)",
+        conn
+    )
     if df.empty:
         return HTMLResponse("<h2>No elephant movement data available</h2>")
     coords = list(zip(df.latitude, df.longitude))
@@ -146,10 +165,7 @@ def generate_map():
         attributes={"font-size": "16", "fill": "red"}
     ).add_to(m)
 
-    m.save("static/elephant_map.html")
-
-    return RedirectResponse(url="/static/elephant_map.html")
-    
+    return HTMLResponse(m._repr_html_())
     @app.get("/delete/{entry_id}")
     def delete_entry(entry_id: int):
         cursor.execute("DELETE FROM elephant_data WHERE id=?", (entry_id,))
