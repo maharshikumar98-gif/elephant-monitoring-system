@@ -21,22 +21,16 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "credentials.json", scope
-)
+import json
+import os
+
+creds_dict = json.loads(os.environ["GOOGLE_CREDS"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope))
 
 client = gspread.authorize(creds)
 
 sheet = client.open("Elephant_Data").sheet1
 
-sheet.append_row([
-    latitude,
-    longitude,
-    observation_time,
-    sign_type,
-    sign_age_hours,
-    presence_time
-])
 def dms_to_decimal(deg, minutes, seconds):
     return float(deg) + float(minutes)/60 + float(seconds)/3600
 
@@ -73,6 +67,8 @@ def add_data(
 
     obs_time = datetime.fromisoformat(observation_time)
     presence_time = obs_time - timedelta(hours=sign_age_hours)
+
+    print("ADDING TO SHEET:", latitude, longitude)
 
     sheet.append_row([
         latitude,
@@ -156,8 +152,7 @@ def generate_map():
     ).add_to(m)
 
     return HTMLResponse(m._repr_html_())
-    @app.get("/delete/{entry_id}")
-    def delete_entry(entry_id: int):
+        def delete_entry(entry_id: int):
         cursor.execute("DELETE FROM elephant_data WHERE id=?", (entry_id,))
         conn.commit()
         return RedirectResponse(url="/map", status_code=303)
@@ -169,8 +164,8 @@ def generate_map():
 @app.get("/export_kml")
 def export_kml():
 
-    df = pd.read_sql_query("SELECT * FROM elephant_data ORDER BY presence_time", conn)
-
+    data = sheet.get_all_records()
+    df = pd.DataFrame(data)
     kml = simplekml.Kml()
 
     coords = []
