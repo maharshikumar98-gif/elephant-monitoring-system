@@ -6,7 +6,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 
-import sqlite3
 import pandas as pd
 from datetime import datetime, timedelta
 import folium
@@ -29,6 +28,15 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(
 client = gspread.authorize(creds)
 
 sheet = client.open("Elephant_Data").sheet1
+
+sheet.append_row([
+    latitude,
+    longitude,
+    observation_time,
+    sign_type,
+    sign_age_hours,
+    presence_time
+])
 def dms_to_decimal(deg, minutes, seconds):
     return float(deg) + float(minutes)/60 + float(seconds)/3600
 
@@ -37,23 +45,6 @@ templates = Jinja2Templates(directory="./templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-# database connection
-conn = sqlite3.connect("database.db", check_same_thread=False)
-cursor = conn.cursor()
-
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS elephant_data (
-id INTEGER PRIMARY KEY,
-latitude REAL,
-longitude REAL,
-observation_time TEXT,
-sign_type TEXT,
-sign_age_hours INTEGER,
-presence_time TEXT
-)
-""")
-
-conn.commit()
 
 
 @app.get("/")
@@ -79,29 +70,28 @@ def add_data(
 ):
     latitude = dms_to_decimal(lat_deg, lat_min, lat_sec)
     longitude = dms_to_decimal(lon_deg, lon_min, lon_sec)
+
     obs_time = datetime.fromisoformat(observation_time)
     presence_time = obs_time - timedelta(hours=sign_age_hours)
 
-    cursor.execute("""
-    INSERT INTO elephant_data
-    (latitude, longitude, observation_time, sign_type, sign_age_hours, presence_time)
-    VALUES (?, ?, ?, ?, ?, ?)
-    """, (latitude, longitude, observation_time, sign_type, sign_age_hours, str(presence_time)))
+    sheet.append_row([
+        latitude,
+        longitude,
+        observation_time,
+        sign_type,
+        sign_age_hours,
+        str(presence_time)
+    ])
 
-    conn.commit()
-
-    return {"status": "Observation added successfully"}
-
+    return {"status": "added"}
 
 
 @app.get("/map")
 def generate_map():
 
 
-    df = pd.read_sql_query(
-        "SELECT * FROM elephant_data ORDER BY datetime(presence_time)",
-        conn
-    )
+    data = sheet.get_all_records()
+    df = pd.DataFrame(data)
     if df.empty:
         return HTMLResponse("<h2>No elephant movement data available</h2>")
     coords = list(zip(df.latitude, df.longitude))
